@@ -11,6 +11,10 @@ spec:
   env:
     - name: DATABSE_URL
       value: "$(NAIS_DATABASE_REOPS-UMAMI_MYDB_JDBC_URL)"
+    - name: "DATABASE_TYPE"
+      value: "postgresql"
+    - name: "SKIP_DB_CHECK"
+      value: "1"
   gcp:
     sqlInstances:
       - type: POSTGRES_14
