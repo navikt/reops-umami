@@ -8,6 +8,12 @@ metadata:
 spec:
   image: {{ image }}
   port: 3000
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_14
+        tier: db-f1-micro
+        databases:
+          - name: reopsumami
   liveness:
     path: /isalive
     port: 3000
