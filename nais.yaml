@@ -10,7 +10,7 @@ spec:
   port: 3000
   env:
     - name: DATABSE_URL
-      value: "$(NAIS_DATABASE_MYAPP_MYDB_JDBC_URL)"
+      value: "$(NAIS_DATABASE_REOPS-UMAMI_MYDB_JDBC_URL)"
   gcp:
     sqlInstances:
       - type: POSTGRES_14
