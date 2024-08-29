@@ -39,4 +39,4 @@ spec:
     max: 2
     cpuThresholdPercentage: 80
   ingresses:
-    - "https://umami.ansatt.nav.no"
+    - "https://umamitest.ansatt.nav.no"
