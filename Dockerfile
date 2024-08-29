@@ -3,10 +3,8 @@ FROM node:18-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package.json yarn.lock ./
-# Add yarn timeout to handle slow CPU when Github Actions
-RUN yarn config set network-timeout 300000
-RUN yarn install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm install
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
@@ -23,7 +21,7 @@ ENV BASE_PATH $BASE_PATH
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build-docker
+RUN npm run build-docker
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
@@ -37,7 +35,7 @@ RUN adduser --system --uid 1001 nextjs
 
 RUN set -x \
     && apk add --no-cache curl \
-    && yarn add npm-run-all dotenv semver prisma@5.17.0
+    && npm install npm-run-all dotenv semver prisma@5.17.0
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js .
@@ -58,4 +56,4 @@ EXPOSE 3000
 ENV HOSTNAME 0.0.0.0
 ENV PORT 3000
 
-CMD ["yarn", "start-docker"]
+CMD ["npm", "run", "start-docker"]
