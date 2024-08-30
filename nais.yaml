@@ -10,7 +10,7 @@ spec:
   port: 3000
   env:
     - name: DATABSE_URL
-      value: "$(NAIS_DATABASE_REOPS-UMAMI_MYDB_JDBC_URL)"
+      value: "$(NAIS_DATABASE_REOPS_UMAMI_DOCKER_REOPSUMAMI_URL)"
     - name: "DATABASE_TYPE"
       value: "postgresql"
     - name: "SKIP_DB_CHECK"
